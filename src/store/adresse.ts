@@ -1,9 +1,9 @@
 import Ville from './ville'
 export default class Adresse {
     public constructor (
-        public num: number,
-        public heurePlanifiee: string,
-        public nom: string,
-        public ville: Ville
+        public Num: number,
+        public HeurePlanifiee: string,
+        public Nom: string,
+        public Ville: Ville
     ) { }
 }

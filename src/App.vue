@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <div id="transports-list">
-      <app-transport v-for="tr of transports" :transport="tr" :key="tr.id"></app-transport>
+    <div id="transports-list" v-if="transports.length > 0">
+        <app-transport v-for="tr in transports" :transport="tr" :key="tr.id"></app-transport>
     </div>
+    <div id="transports-list" v-else></div>
     <app-alert :msg="error"></app-alert>
   </div>
 </template>
@@ -28,16 +29,34 @@
     }
   }
 }
+
+.row {
+    display: flex;
+    justify-content: center;
+  }
+
+.container {
+  display: flex;
+}
+
+.col-xs-1 { widows: 8.33%; }
+.col-xs-2 { widows: 16.66%; }
+.col-xs-3 { widows: 25%; }
+.col-xs-4 { widows: 33.33%; }
+.col-xs-5 { widows: 41.66%; }
+.col-xs-6 { widows: 50%; }
+.col-xs-7 { widows: 58.33%; }
+.col-xs-8 { widows: 66.66%; }
+.col-xs-9 { widows: 75%; }
+.col-xs-10 { widows: 83.33%; }
+.col-xs-11 { widows: 91.66%; }
+.col-xs-12 { widows: 100%; }
 </style>
 <script lang="ts">
-import Vue from 'vue'
-import Transport from './store/transport'
 import StrongVue from './store/strongvue'
 import { FETCH_TRANSPORT, FetchTransportParams } from './store/actions'
-import { State } from './store'
 import AppAlert from './components/app-alert.vue'
 import AppTransport from './components/app-transport.vue'
-import AppAdresse from './components/app-adresse.vue'
 
 export default StrongVue.extend({
   data () {
@@ -47,7 +66,7 @@ export default StrongVue.extend({
     }
   },
   created () {
-    const prms = new FetchTransportParams(97, new Date(2020, 3, 12))
+    const prms = new FetchTransportParams(39, new Date(2020, 7, 5))
     this.$store.dispatch({
       type: FETCH_TRANSPORT,
       idClient: prms.idClient,
@@ -55,7 +74,8 @@ export default StrongVue.extend({
     })
   },
   components: {
-    AppAlert, AppTransport, AppAdresse
+    AppAlert,
+    AppTransport
   }
 })
 </script>

@@ -1,20 +1,20 @@
 import Adresse from './adresse'
 
 export default class Transport {
-    public nom: string = "";
-    public journee: Date = new Date();
-    public depart: Adresse;
-    public arrivee: Adresse;
-    public id: number = 0;
+    public Nom: string = "";
+    public Journee: Date = new Date();
+    public Depart: Adresse;
+    public Arrivee: Adresse;
+    public Id: number = 0;
 
     private static maxId : number = 0;
 
     public constructor(nom: string, journee: Date, depart: Adresse,
         arrivee: Adresse) {
-            this.nom = nom;
-            this.journee = journee;
-            this.depart = depart;
-            this.arrivee = arrivee;
-            this.id = Transport.maxId++;
+            this.Nom = nom;
+            this.Journee = journee;
+            this.Depart = depart;
+            this.Arrivee = arrivee;
+            this.Id = Transport.maxId++;
     }
 }

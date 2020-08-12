@@ -4,8 +4,8 @@ import Config from '../config'
 import moment from 'moment'
 
 export default class TransportService {
-  public getTransports (idClient: number, journee: Date): Observable<Transport> {
-    return from(axios.get<Transport>(Config.baseUrl + 'mission/ObtenirClient', {
+  public getTransports (idClient: number, journee: Date): Observable<Transport[]> {
+    return from(axios.get<Transport[]>(Config.baseUrl + 'mission/ObtenirClient', {
       params: {
         idClient,
         journee: moment(journee).format('yyyy-MM-DDT00:00:00')

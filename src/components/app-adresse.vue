@@ -1,16 +1,15 @@
 <template>
-  <row>
-    <column class="heure-item" :sm="3">{{ heureFmt }}</column>
-      <row>
-        <column class="adresse-r1-item" :xm="12">{{ adr.num }} {{ adr.nom }}</column>
-      </row>
-      <row>
-        <column class="adresse-r2-item" :xm="12">{{ adr.ville.codePostal }} {{ adr.ville.nom }}</column>
-      </row>
-    </row>
+  <div class="row">
+    <div class="col-xs-3 heure-item">{{ heureFmt }}</div>
+      <div class="row">
+        <div class="col-xs-12 adresse-r1-item" >{{ adr ? adr.Num : ''}} {{ adr ? adr.Nom : '' }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 adresse-r2-item">{{ adr && adr.Ville ? adr.Ville.CodePostal : '' }} {{ adr && adr.Ville ? adr.Ville.Nom : '' }}</div>
+      </div>
+  </div>
 </template>
 <style lang="scss">
-
 </style>
 
 <script lang="ts">
@@ -19,7 +18,11 @@ export default {
   props: ['adr'],
   computed: {
     heureFmt () {
-      return DateUtils.format(this.adr.heurePlanifiee)
+      if (this.adr) {
+        return DateUtils.formatHeure(this.adr.HeurePlanifiee)
+      } else {
+        return null
+      }
     }
   }
 }
