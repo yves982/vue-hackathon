@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Transport from './transport'
-import { mFetchTransports } from './mutations'
+import { mFetchTransports, mEmptyTransports } from './mutations'
 import {
   FETCH_TRANSPORT,
-  aFetchTransports
+  aFetchTransports,
+  aEmptyTransports
 } from './actions'
 
 Vue.use(Vuex)
@@ -20,10 +21,12 @@ export default new Vuex.Store<State>({
     fetchTransportsError: ''
   },
   mutations: {
-    fetchTransports: mFetchTransports.bind(this)
+    fetchTransports: mFetchTransports.bind(this),
+    emptyTransports: mEmptyTransports.bind(this)
   },
   actions: {
-    fetchTransports: aFetchTransports.bind(this)
+    fetchTransports: aFetchTransports.bind(this),
+    emptyTransports: aEmptyTransports.bind(this)
   },
   modules: {
   }

@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <div class="intro">
+      Liste des missions de l'élève {{ transports | arrFirst | nomPrenomClient}}
+    </div>
+    <div class="btn">
+      <button @click="loadLst">{{btnTxt}}</button>
+    </div>
     <div id="transports-list" v-if="transports.length > 0">
         <app-transport v-for="tr in transports" :transport="tr" :key="tr.id"></app-transport>
     </div>
@@ -98,10 +104,10 @@
 <script lang="ts">
 import moment from 'moment'
 import StrongVue from './store/strongvue'
-import { FETCH_TRANSPORT, FetchTransportParams } from './store/actions'
+import { FETCH_TRANSPORT, FetchTransportParams, EMPTY_TRANSPORT } from './store/actions'
 import AppAlert from './components/app-alert.vue'
 import AppTransport from './components/app-transport.vue'
-
+import Transport from './store/transport'
 export default StrongVue.extend({
   data () {
     return {
@@ -111,16 +117,35 @@ export default StrongVue.extend({
   },
   created () {
     moment.locale('fr')
-    const prms = new FetchTransportParams(39, new Date(2020, 7, 5))
-    this.$store.dispatch({
-      type: FETCH_TRANSPORT,
-      idClient: prms.idClient,
-      journee: prms.journee
-    })
   },
   components: {
     AppAlert,
     AppTransport
+  },
+  computed: {
+    btnTxt (): string {
+      if (this.transports && this.transports.length > 0) {
+        return 'Masquer les missions'
+      } else {
+        return 'Charger les missions'
+      }
+    }
+  },
+  methods: {
+    loadLst (): void {
+      if (this.transports && this.transports.length > 0) {
+        this.$store.dispatch({
+          type: EMPTY_TRANSPORT
+        })
+      } else {
+        const prms = new FetchTransportParams(39, new Date(2020, 7, 5))
+        this.$store.dispatch({
+          type: FETCH_TRANSPORT,
+          idClient: prms.idClient,
+          journee: prms.journee
+        })
+      }
+    }
   }
 })
 </script>

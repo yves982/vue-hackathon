@@ -2,6 +2,8 @@ import { ActionContext } from 'vuex'
 import { State } from '.'
 import TransportService from '@/services/transport.service'
 export const FETCH_TRANSPORT = 'fetchTransports'
+export const EMPTY_TRANSPORT = 'emptyTransports'
+export const FETCH_TRANSPORT_ERR = 'fetchTransportsErr'
 
 export class FetchTransportParams {
     public idClient = 0;
@@ -17,5 +19,20 @@ export function aFetchTransports (ctx: ActionContext<State, State>,
   params: FetchTransportParams) {
   const transportSvc = new TransportService()
   const transports = transportSvc.getTransports(params.idClient, params.journee)
-  ctx.commit(FETCH_TRANSPORT, transports)
+    .subscribe(
+      transport => {
+        ctx.commit(FETCH_TRANSPORT, transport)
+      },
+      err => {
+        ctx.commit(FETCH_TRANSPORT_ERR, err)
+      })
+}
+export function aFetchTransportsErr (ctx: ActionContext<State, State>,
+  err: string) {
+  ctx.commit(FETCH_TRANSPORT_ERR, err)
+}
+
+export function aEmptyTransports (ctx: ActionContext<State, State>,
+  params: FetchTransportParams) {
+  ctx.commit(EMPTY_TRANSPORT)
 }

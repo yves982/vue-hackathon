@@ -3,7 +3,7 @@
     <div class="col-xs-3 heure-item">{{ heureFmt }}</div>
     <div class="col-xs-9">
         <div class="row">
-          <div class="col-xs-12 adresse-r1-item" >{{ nullOrEmpty(adr.Numero) }} {{ nullOrEmpty(adr.Prefixe) }} {{ nullOrEmpty(adr.Nom) }}</div>
+          <div class="col-xs-12 adresse-r1-item" >{{ adr.Numero | nullOrEmpty }} {{ adr.Prefixe | nullOrEmpty }} {{ adr.Nom | nullOrEmpty }}</div>
         </div>
         <div class="row">
           <div class="col-xs-12 adresse-r2-item">{{ adr && adr.Ville ? adr.Ville.CodePostal : '' }} {{ adr && adr.Ville ? adr.Ville.Nom : '' }}</div>
@@ -29,11 +29,6 @@ export default {
       } else {
         return null
       }
-    }
-  },
-  methods: {
-    nullOrEmpty (str: string): string {
-      return StringUtils.nullOrEmpty(str)
     }
   }
 }
