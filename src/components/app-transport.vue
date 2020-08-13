@@ -1,8 +1,8 @@
 <template>
     <div :xl="1200" class="transport-container">
         <div class="row">
-            <div class="col-xs-4 date-item">{{ formatDate(transport.Journee) }}</div>
-            <div class="col-xs-8 nom-item">{{ transport.Nom }}</div>
+            <div class="col-xs-4 date-item pull-left">{{ formatDateHR(transport.Journee) }}</div>
+            <div class="col-xs-8 nom-item pull-right bold">{{ transport.Nom }}</div>
         </div>
         <app-adresse :adr="transport.Depart"></app-adresse>
         <app-adresse :adr="transport.Arrivee"></app-adresse>
@@ -21,8 +21,8 @@ export default {
     AppAdresse
   },
   methods: {
-    formatDate (date: Date) {
-      return DateUtils.format(date)
+    formatDateHR (date: Date) {
+      return DateUtils.formatHR(date)
     }
   }
 }
