@@ -17,7 +17,7 @@ export interface State {
 
 export default new Vuex.Store<State>({
   state: {
-    transports: [],
+    transports: new Array<Transport>(),
     fetchTransportsError: ''
   },
   mutations: {
@@ -29,5 +29,6 @@ export default new Vuex.Store<State>({
     emptyTransports: aEmptyTransports.bind(this)
   },
   modules: {
-  }
+  },
+  devtools: true
 })

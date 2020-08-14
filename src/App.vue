@@ -108,10 +108,10 @@ import { FETCH_TRANSPORT, FetchTransportParams, EMPTY_TRANSPORT } from './store/
 import AppAlert from './components/app-alert.vue'
 import AppTransport from './components/app-transport.vue'
 import Transport from './store/transport'
+import { mapState } from 'vuex'
 export default StrongVue.extend({
   data () {
     return {
-      transports: this.$store.state.transports,
       error: this.$store.state.fetchTransportsError
     }
   },
@@ -123,6 +123,9 @@ export default StrongVue.extend({
     AppTransport
   },
   computed: {
+    // maps this.$store.transports to a transports computed property
+    // equivalent of transports: function() { return this.$store.transports }
+    ...mapState(['transports']),
     btnTxt (): string {
       if (this.transports && this.transports.length > 0) {
         return 'Masquer les missions'

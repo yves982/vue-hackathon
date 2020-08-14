@@ -1,7 +1,6 @@
-import { Store } from 'vuex'
-import { Observable } from 'rxjs'
+import Vuex from 'vuex'
 import Transport from './transport'
-import { State } from '.'
+import store, { State } from '.'
 
 export function mFetchTransports (store: State,
   data: Transport[]): void {
@@ -14,7 +13,5 @@ export function mFetchTransportsErr (store: State,
 }
 
 export function mEmptyTransports (store: State): void {
-  for (let i = store.transports.length - 1; i >= 0; i--) {
-    store.transports.pop()
-  }
+  store.transports = []
 }
