@@ -27,11 +27,6 @@ export function aFetchTransports (ctx: ActionContext<State, State>,
         ctx.commit(FETCH_TRANSPORT_ERR, err)
       })
 }
-export function aFetchTransportsErr (ctx: ActionContext<State, State>,
-  err: string) {
-  ctx.commit(FETCH_TRANSPORT_ERR, err)
-}
-
 export function aEmptyTransports (ctx: ActionContext<State, State>,
   params: FetchTransportParams) {
   ctx.commit(EMPTY_TRANSPORT)
