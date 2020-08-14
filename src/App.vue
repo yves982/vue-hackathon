@@ -110,11 +110,6 @@ import AppTransport from './components/app-transport.vue'
 import Transport from './store/transport'
 import { mapState } from 'vuex'
 export default StrongVue.extend({
-  data () {
-    return {
-      error: this.$store.state.fetchTransportsError
-    }
-  },
   created () {
     moment.locale('fr')
   },
@@ -125,7 +120,10 @@ export default StrongVue.extend({
   computed: {
     // maps this.$store.transports to a transports computed property
     // equivalent of transports: function() { return this.$store.transports }
-    ...mapState(['transports']),
+    ...mapState({
+      transports: 'transports',
+      error: 'fetchTransportsError'
+    }),
     btnTxt (): string {
       if (this.transports && this.transports.length > 0) {
         return 'Masquer les missions'
